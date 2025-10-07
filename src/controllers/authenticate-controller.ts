@@ -5,10 +5,10 @@ import {
   UnauthorizedException,
   UsePipes,
 } from '@nestjs/common'
-import type { JwtService } from '@nestjs/jwt'
+import { JwtService } from '@nestjs/jwt'
 import { compare } from 'bcryptjs'
 import { ZodValidationPipe } from 'src/pipe/zod-validation-pipe'
-import type { PrismaService } from 'src/prisma/prisma.service'
+import { PrismaService } from 'src/prisma/prisma.service'
 import z from 'zod'
 
 const authenticateBodySchema = z.object({
@@ -20,7 +20,7 @@ type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
 
 @Controller('/sessions')
 export class AuthenticateController {
-  constructor(private jwt: JwtService, private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private jwt: JwtService) {}
 
   @Post()
   @UsePipes(new ZodValidationPipe(authenticateBodySchema))
@@ -45,6 +45,6 @@ export class AuthenticateController {
 
     const accessToken = this.jwt.sign({ sub: user.id })
 
-    return { accessToken }
+    return { access_token: accessToken }
   }
 }

@@ -1,8 +1,9 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common'
+import { Controller, Post, UseGuards } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
-import { ZodValidationPipe } from 'src/pipe/zod-validation-pipe'
+import type { Request } from 'express'
+import { CurrentUser } from 'src/auth/current-user-decorator'
+import type { UserPayload } from 'src/auth/jwt.strategy'
 import { PrismaService } from 'src/prisma/prisma.service'
-import z from 'zod'
 
 @Controller('/questions')
 @UseGuards(AuthGuard('jwt'))
@@ -10,7 +11,7 @@ export class CreateQuestionController {
   constructor(private prisma: PrismaService) {}
 
   @Post()
-  async handle() {
-    return { message: 'Hello World' }
+  async handle(@CurrentUser() user: UserPayload) {
+    console.log(user)
   }
 }

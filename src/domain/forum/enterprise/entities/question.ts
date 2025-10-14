@@ -14,7 +14,7 @@ export interface QuestionProps {
   slug: Slug
   attachments: QuestionAttachmentList
   createdAt: Date
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 export class Question extends AggregateRoot<QuestionProps> {
@@ -84,7 +84,10 @@ export class Question extends AggregateRoot<QuestionProps> {
       return
     }
 
-    if (this.props.bestAnswerId === undefined || !bestAnswerId.equals(this.props.bestAnswerId)) {
+    if (
+      this.props.bestAnswerId === undefined ||
+      !bestAnswerId.equals(this.props.bestAnswerId)
+    ) {
       this.addDomainEvent(new QuestionBestAnswerChosenEvent(this, bestAnswerId))
     }
 
@@ -95,7 +98,7 @@ export class Question extends AggregateRoot<QuestionProps> {
 
   static create(
     props: Optional<QuestionProps, 'createdAt' | 'slug' | 'attachments'>,
-    id?: UniqueEntityID,
+    id?: UniqueEntityID
   ) {
     const question = new Question(
       {
@@ -104,7 +107,7 @@ export class Question extends AggregateRoot<QuestionProps> {
         attachments: props.attachments ?? new QuestionAttachmentList(),
         createdAt: props.createdAt ?? new Date(),
       },
-      id,
+      id
     )
 
     return question

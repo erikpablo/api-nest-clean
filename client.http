@@ -6,8 +6,8 @@ POST {{baseUrl}}/accounts
 Content-Type: application/json
 
 {
-  "name": "Maxmiller",
-  "email": "maxmiller12334@gmail.com",
+  "name": "ERIK PABLO",
+  "email": "erikpablo@gmail.com",
   "password": "123456"
 }
 
@@ -19,8 +19,8 @@ POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-  "email": "maxmiller12334@gmail.com",
-  "password": "123456"
+  "email": "erikpablo@gmail.com",
+  "password": "1234567"
 }
 ###
 

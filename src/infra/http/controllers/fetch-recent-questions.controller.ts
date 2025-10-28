@@ -1,4 +1,10 @@
-import { Controller, Get, Query, UseGuards } from '@nestjs/common'
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  Query,
+  UseGuards,
+} from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { ZodValidationPipe } from '@/infra/http/pipe/zod-validation-pipe'
 import z from 'zod'
@@ -28,7 +34,7 @@ export class FetchRecentQuestionsController {
     })
 
     if (result.isLeft()) {
-      throw new Error()
+      throw new BadRequestException()
     }
 
     const questions = result.value.questions

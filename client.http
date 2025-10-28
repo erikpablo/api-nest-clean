@@ -31,7 +31,7 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-  "title": "Estou estudando Muitoo? ",
+  "title": "Estou estudando Muito?? ",
   "content": "Sem duvidasss"
 }
 ###

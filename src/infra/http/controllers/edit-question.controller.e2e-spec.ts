@@ -18,7 +18,7 @@ describe('Edit question (e2e)', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory],
+      providers: [StudentFactory, QuestionFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
@@ -42,14 +42,14 @@ describe('Edit question (e2e)', () => {
     const questionId = question.id.toString()
 
     const response = await request(app.getHttpServer())
-      .put(`/question/${questionId}`)
+      .put(`/questions/${questionId}`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
         title: 'New title',
         content: 'new content',
       })
 
-    expect(response.statusCode).toBe(204)
+    expect(response.status).toBe(204)
 
     const questionOnDataBase = await prisma.question.findFirst({
       where: {
@@ -57,5 +57,7 @@ describe('Edit question (e2e)', () => {
         content: 'new content',
       },
     })
+
+    expect(questionOnDataBase).toBeTruthy()
   })
 })

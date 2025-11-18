@@ -10,7 +10,7 @@ import { CurrentUser } from '@/infra/auth/current-user-decorator'
 import type { UserPayload } from '@/infra/auth/jwt.strategy'
 import { ZodValidationPipe } from '@/infra/http/pipe/zod-validation-pipe'
 import z from 'zod'
-import type { CommentOnQuestionUseCase } from '@/domain/forum/application/use-cases/comment-on-question'
+import { CommentOnQuestionUseCase } from '@/domain/forum/application/use-cases/comment-on-question'
 
 const commentOnQuestionBodySchema = z.object({
   content: z.string(),

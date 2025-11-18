@@ -45,7 +45,7 @@ describe('Comment on question (e2e)', () => {
       .post(`/questions/${questionId}/comments`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
-        content: 'New answer',
+        content: 'New Comment',
       })
 
     expect(response.status).toBe(201)
